@@ -1,0 +1,114 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap");
+
+@font-face {
+  font-family: "Monument";
+  src: url("https://res.cloudinary.com/dwlk3wdoj/raw/upload/v1713391624/MonumentExtended-Regular_mbxhg4.woff2")
+    format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 0%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 0%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 0%;
+
+    --primary: 0 0% 0%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 0 0% 96%;
+    --secondary-foreground: 0 0% 0%;
+
+    --muted: 0 0% 96%;
+    --muted-foreground: 0 0% 45%;
+
+    --accent: 0 0% 96%;
+    --accent-foreground: 0 0% 0%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 0 0% 89.8%;
+    --input: 0 0% 89.8%;
+    --ring: 0 0% 0%;
+
+    --radius: 0rem;
+  }
+}
+
+@layer base {
+  a,
+  button,
+  .interactive {
+    cursor: none !important;
+  }
+
+  * {
+    @apply border-border;
+  }
+  html {
+    @apply scroll-smooth;
+    cursor: none;
+  }
+  body {
+    @apply bg-white text-foreground font-sans antialiased selection:bg-black selection:text-white;
+    overscroll-behavior: none;
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-display tracking-widest uppercase;
+  }
+  p {
+    @apply font-sans tracking-wider;
+  }
+  .custom-cursor {
+    @apply fixed pointer-events-none z-50 opacity-0 transition-opacity duration-300;
+  }
+  .section-transition {
+    @apply opacity-0;
+  }
+  .section-transition.visible {
+    @apply animate-fade-up;
+  }
+  .image-container {
+    @apply overflow-hidden w-full relative;
+  }
+  .image-container img {
+    @apply w-full h-full object-cover transition-transform duration-1200 ease-out;
+    transform-origin: center;
+  }
+  .image-container:hover img {
+    @apply scale-105;
+  }
+  .menu-link {
+    @apply relative inline-block overflow-hidden;
+  }
+  .menu-link:after {
+    content: "";
+    @apply absolute bottom-0 left-0 w-0 h-px bg-black transition-all duration-500;
+  }
+  .menu-link:hover:after {
+    @apply w-full;
+  }
+  .logo-text {
+    @apply tracking-[0.25em] transition-all duration-500;
+  }
+  .logo-text:hover {
+    @apply tracking-[0.35em];
+  }
+}
