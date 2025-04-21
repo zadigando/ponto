@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 const scramble = (
   target: string,
@@ -30,31 +30,20 @@ const scramble = (
   }, frameInterval);
 };
 
-const Navigation = ({ onReset }: { onReset?: () => void }) => {
-  const [scrollPosition, setScrollPosition] = useState(0);
-  const [leftText, setLeftText] = useState("PONTO");
-  const [rightText, setRightText] = useState("AC");
-
-  useEffect(() => {
-    const handleScroll = () => setScrollPosition(window.scrollY);
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+const BottomBar = ({ onReset }: { onReset?: () => void }) => {
+  const [leftText, setLeftText] = useState("AC");
+  const [rightText, setRightText] = useState("PONTO");
 
   const handleHoverLeft = () => {
-    scramble("PONTO", setLeftText);
+    scramble("AC", setLeftText);
   };
 
   const handleHoverRight = () => {
-    scramble("AC", setRightText);
+    scramble("PONTO", setRightText);
   };
 
   return (
-    <header
-      className={`fixed top-0 left-0 w-full z-40 px-8 md:px-12 py-8 transition-all duration-700 flex justify-between items-center ${
-        scrollPosition > 100 ? "bg-white/80 backdrop-blur-sm" : "bg-transparent"
-      }`}
-    >
+    <div className="fixed bottom-0 left-0 w-full z-40 px-8 md:px-12 py-8 transition-all duration-700 flex justify-between items-center bg-transparent">
       {/* Esquerda */}
       <div
         className="interactive z-50 cursor-pointer"
@@ -76,8 +65,8 @@ const Navigation = ({ onReset }: { onReset?: () => void }) => {
           {rightText}
         </h1>
       </div>
-    </header>
+    </div>
   );
 };
 
-export default Navigation;
+export default BottomBar;

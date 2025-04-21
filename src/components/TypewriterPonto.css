@@ -1,7 +1,7 @@
 .typewriter-cursor {
   display: inline-block;
   width: 1ch;
-  animation: blink 1s infinite;
+  animation: blink 1s step-start infinite;
   color: black;
 }
 
@@ -11,6 +11,21 @@
     opacity: 1;
   }
   50% {
+    opacity: 0;
+  }
+}
+
+.typewriter-cursor {
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  0%,
+  49% {
+    opacity: 1;
+  }
+  50%,
+  100% {
     opacity: 0;
   }
 }

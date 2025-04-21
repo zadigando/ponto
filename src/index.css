@@ -1,14 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap");
 
-@font-face {
-  font-family: "Monument";
-  src: url("https://res.cloudinary.com/dwlk3wdoj/raw/upload/v1713391624/MonumentExtended-Regular_mbxhg4.woff2")
-    format("woff2");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -96,19 +87,38 @@
     @apply scale-105;
   }
   .menu-link {
-    @apply relative inline-block overflow-hidden;
+    position: relative;
+    display: inline-block;
+    text-decoration: none;
   }
-  .menu-link:after {
+
+  .menu-link::after {
     content: "";
-    @apply absolute bottom-0 left-0 w-0 h-px bg-black transition-all duration-500;
+    position: absolute;
+    bottom: -2px; /* ajuste fino vertical */
+    left: 0;
+    width: 0%;
+    height: 1px;
+    background-color: black;
+    transition: width 0.3s ease;
   }
-  .menu-link:hover:after {
-    @apply w-full;
+
+  .menu-link:hover::after {
+    width: 100%;
   }
+
   .logo-text {
     @apply tracking-[0.25em] transition-all duration-500;
   }
   .logo-text:hover {
     @apply tracking-[0.35em];
   }
+}
+
+body {
+  overflow: hidden !important;
+}
+
+html {
+  overflow: hidden !important;
 }
