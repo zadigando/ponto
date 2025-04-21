@@ -38,7 +38,7 @@ const Index = () => {
         <TypewriterPonto />
         <div className="flex flex-col gap-6 text-base md:text-lg font-sans text-black">
           <a href="#quem-somos" className="menu-link interactive">
-            quem?
+            quem.
           </a>
           <a
             href="/ponto-servicos.pdf"
@@ -46,15 +46,15 @@ const Index = () => {
             rel="noopener noreferrer"
             className="menu-link interactive"
           >
-            o que?
+            o que.
           </a>
           <a href="#com-quem-fazemos" className="menu-link interactive">
-            com quem?
+            com quem.
           </a>
         </div>
         <div className="mt-16 md:mt-32 flex flex-col md:flex-row justify-between items-start md:items-center">
           <p className="text-xs text-black/50">
-            © {currentYear} Ponto. Todos os direitos reservados.
+            © {currentYear} ponto.ac. Todos os direitos reservados.
           </p>
         </div>
       </section>

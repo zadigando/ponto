@@ -33,7 +33,7 @@ const scramble = (
 const Navigation = () => {
   const [scrollPosition, setScrollPosition] = useState(0);
   const [leftText, setLeftText] = useState("PONTO");
-  const [rightText, setRightText] = useState("PONTO");
+  const [rightText, setRightText] = useState("AC");
 
   useEffect(() => {
     const handleScroll = () => setScrollPosition(window.scrollY);
@@ -46,7 +46,7 @@ const Navigation = () => {
   };
 
   const handleHoverRight = () => {
-    scramble("PONTO", setRightText);
+    scramble("AC", setRightText);
   };
 
   return (
