@@ -7,7 +7,9 @@ import BottomBar from "@/components/BottomBorder";
 
 const Index = () => {
   const currentYear = new Date().getFullYear();
-  const [activeSection, setActiveSection] = useState<"home" | "quem">("home");
+  const [activeSection, setActiveSection] = useState<
+    "home" | "quem" | "oque" | "oque-marketing" | "oque-ti"
+  >("home");
   const [transitioning, setTransitioning] = useState(false);
 
   useEffect(() => {
@@ -40,6 +42,30 @@ const Index = () => {
     }, 500); // tempo da transição
   };
 
+  const handleClickOque = () => {
+    setTransitioning(true);
+    setTimeout(() => {
+      setActiveSection("oque");
+      setTransitioning(false);
+    }, 500);
+  };
+
+  const handleClickMarketing = () => {
+    setTransitioning(true);
+    setTimeout(() => {
+      setActiveSection("oque-marketing");
+      setTransitioning(false);
+    }, 500);
+  };
+
+  const handleClickTI = () => {
+    setTransitioning(true);
+    setTimeout(() => {
+      setActiveSection("oque-ti");
+      setTransitioning(false);
+    }, 500);
+  };
+
   return (
     <div className="relative">
       <CursorEffect />
@@ -47,7 +73,17 @@ const Index = () => {
 
       <section className="h-screen flex flex-col items-center justify-center text-center gap-12 section-transition bg-white">
         <TypewriterPonto
-          overrideText={activeSection === "quem" ? "quem." : null}
+          overrideText={
+            activeSection === "quem"
+              ? "quem."
+              : activeSection === "oque"
+              ? "oque."
+              : activeSection === "oque-marketing"
+              ? "marketing."
+              : activeSection === "oque-ti"
+              ? "ti."
+              : null
+          }
         />
         <div
           className={`transition-opacity duration-500 ${
@@ -63,14 +99,12 @@ const Index = () => {
                 >
                   <span className="relative z-10">quem.</span>
                 </button>
-                <a
-                  href="/ponto-servicos.pdf"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="menu-link interactive"
+                <button
+                  onClick={handleClickOque}
+                  className="menu-link interactive text-black"
                 >
                   <span className="relative z-10">o que.</span>
-                </a>
+                </button>
                 <a href="#com-quem-fazemos" className="menu-link interactive">
                   <span className="relative z-10">com quem.</span>
                 </a>
@@ -100,6 +134,40 @@ const Index = () => {
             <div className="w-full md:w-1/2">
               <p>Somos a PONTO.</p>
             </div>
+          </div>
+        )}
+        {activeSection === "oque" && !transitioning && (
+          <div className="mt-6 flex gap-12 justify-center text-black text-lg font-sans">
+            <button
+              onClick={handleClickMarketing}
+              className="menu-link interactive"
+            >
+              marketing.
+            </button>
+            <button onClick={handleClickTI} className="menu-link interactive">
+              ti.
+            </button>
+          </div>
+        )}
+        {activeSection === "oque-marketing" && !transitioning && (
+          <div className="mt-10 text-black text-base leading-relaxed max-w-xl mx-auto px-4 text-left space-y-3">
+            <p>Produção editorial (mídia kit)</p>
+            <p>Planejamento de conteúdo</p>
+            <p>Design gráfico (arte)</p>
+            <p>Edição de conteúdo</p>
+            <p>Soluções especiais</p>
+            <p>Captação de mídia</p>
+            <p>Análise de dados</p>
+            <p>Tráfego pago</p>
+          </div>
+        )}
+        {activeSection === "oque-ti" && !transitioning && (
+          <div className="mt-10 text-black text-base leading-relaxed max-w-xl mx-auto px-4 text-left space-y-3">
+            <p>Desenvolvimento de landing page</p>
+            <p>Desenvolvimento de chat bot</p>
+            <p>Desenvolvimento de CRM</p>
+            <p>Desenvolvimento de site</p>
+            <p>Soluções especiais</p>
           </div>
         )}
       </section>
