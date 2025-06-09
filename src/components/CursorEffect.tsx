@@ -13,22 +13,32 @@ const CursorEffect = () => {
     const onMouseEnter = () => setHidden(false);
     const onMouseLeave = () => setHidden(true);
 
-    const handleLinkHoverEvents = () => {
+    const enter = () => setLinkHovered(true);
+    const leave = () => setLinkHovered(false);
+
+    const updateListeners = () => {
       document.querySelectorAll("a, button, .interactive").forEach((el) => {
-        el.addEventListener("mouseenter", () => setLinkHovered(true));
-        el.addEventListener("mouseleave", () => setLinkHovered(false));
+        el.removeEventListener("mouseenter", enter);
+        el.removeEventListener("mouseleave", leave);
+        el.addEventListener("mouseenter", enter);
+        el.addEventListener("mouseleave", leave);
       });
     };
 
     document.addEventListener("mousemove", onMouseMove);
     document.addEventListener("mouseenter", onMouseEnter);
     document.addEventListener("mouseleave", onMouseLeave);
-    handleLinkHoverEvents();
+
+    updateListeners();
+
+    const observer = new MutationObserver(updateListeners);
+    observer.observe(document.body, { childList: true, subtree: true });
 
     return () => {
       document.removeEventListener("mousemove", onMouseMove);
       document.removeEventListener("mouseenter", onMouseEnter);
       document.removeEventListener("mouseleave", onMouseLeave);
+      observer.disconnect();
     };
   }, []);
 

@@ -4,12 +4,21 @@ import CursorEffect from "@/components/CursorEffect";
 import Footer from "@/components/Footer";
 import TypewriterPonto from "@/components/TypewriterPonto";
 import BottomBar from "@/components/BottomBorder";
+import RadialMenu from "@/components/RadialMenu";
 
 const Index = () => {
   const currentYear = new Date().getFullYear();
   const [activeSection, setActiveSection] = useState<
-    "home" | "quem" | "oque" | "oque-marketing" | "oque-ti"
+    | "home"
+    | "quem"
+    | "oque"
+    | "oque-marketing"
+    | "oque-ti"
+    | "comquem"
+    | "comquem-colaborador"
+    | "comquem-enzo"
   >("home");
+
   const [transitioning, setTransitioning] = useState(false);
 
   useEffect(() => {
@@ -66,6 +75,29 @@ const Index = () => {
     }, 500);
   };
 
+  const handleClickComQuem = () => {
+    setTransitioning(true);
+    setTimeout(() => {
+      setActiveSection("comquem");
+      setTransitioning(false);
+    }, 500);
+  };
+
+  const handleClickColaborador = () => {
+    setTransitioning(true);
+    setTimeout(() => {
+      setActiveSection("comquem-colaborador");
+      setTransitioning(false);
+    }, 500);
+  };
+  const handleClickEnzo = () => {
+    setTransitioning(true);
+    setTimeout(() => {
+      setActiveSection("comquem-enzo");
+      setTransitioning(false);
+    }, 500);
+  };
+
   return (
     <div className="relative">
       <CursorEffect />
@@ -82,6 +114,12 @@ const Index = () => {
               ? "marketing."
               : activeSection === "oque-ti"
               ? "ti."
+              : activeSection === "comquem"
+              ? "com quem."
+              : activeSection === "comquem-colaborador"
+              ? "nosso colaborador."
+              : activeSection === "comquem-enzo"
+              ? "enzo"
               : null
           }
         />
@@ -105,9 +143,12 @@ const Index = () => {
                 >
                   <span className="relative z-10">o que.</span>
                 </button>
-                <a href="#com-quem-fazemos" className="menu-link interactive">
+                <button
+                  onClick={handleClickComQuem}
+                  className="menu-link interactive text-black"
+                >
                   <span className="relative z-10">com quem.</span>
-                </a>
+                </button>
               </div>
               <div className="mt-16 md:mt-32 flex flex-col md:flex-row justify-between items-start md:items-center">
                 <p className="text-xs text-black/50">
@@ -168,6 +209,55 @@ const Index = () => {
             <p>Desenvolvimento de CRM</p>
             <p>Desenvolvimento de site</p>
             <p>Soluções especiais</p>
+          </div>
+        )}
+        {activeSection === "comquem" && !transitioning && (
+          <div className="mt-12 opacity-0 scale-95 animate-fade-in">
+            <RadialMenu
+              items={[
+                {
+                  id: "colab1",
+                  label: "Gregory",
+                  onClick: handleClickColaborador,
+                },
+                {
+                  id: "colab2",
+                  label: "Lucas",
+                  onClick: handleClickColaborador,
+                },
+                {
+                  id: "colab3",
+                  label: "Enzo",
+                  onClick: handleClickEnzo,
+                },
+                {
+                  id: "colab4",
+                  label: "Zadig",
+                  onClick: handleClickColaborador,
+                },
+              ]}
+            />
+          </div>
+        )}
+
+        {activeSection === "comquem-colaborador" && !transitioning && (
+          <div className="mt-12 text-black max-w-3xl mx-auto px-4 space-y-4 text-left text-base leading-relaxed">
+            <h2 className="text-xl font-semibold">Nosso colaborador</h2>
+            <p>
+              Trabalhamos com uma rede de colaboradores especializados nas áreas
+              de conteúdo, design, tecnologia e análise de dados.
+            </p>
+            <p>
+              Cada parceiro é selecionado com base em sua experiência,
+              criatividade e comprometimento com resultados.
+            </p>
+          </div>
+        )}
+        {activeSection === "comquem-enzo" && !transitioning && (
+          <div className="mt-12 text-black max-w-3xl mx-auto px-4 space-y-4 text-left text-base leading-relaxed opacity-0 scale-95 animate-fade-in">
+            <h2 className="text-xl font-semibold">Enzo, the dude</h2>
+            <p>Enzo é DJ nosso.</p>
+            <p>Ele bom e novo</p>
           </div>
         )}
       </section>
