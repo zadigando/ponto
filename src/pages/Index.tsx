@@ -137,7 +137,8 @@ const Index = () => {
                 ? "zadig"
                 : null
             }
-            animate={
+            animate={true}
+            loop={
               activeSection === "home" ||
               activeSection === "comquem-enzo" ||
               activeSection === "comquem-zadig"
