@@ -112,7 +112,12 @@ const Index = () => {
       <Navigation onReset={() => setActiveSection("home")} />
 
       <section className="h-screen flex flex-col items-center justify-center text-center gap-12 section-transition bg-white">
-        <TypewriterPonto
+        <div
+          className={`transition-opacity duration-500 ${
+            transitioning ? "opacity-0" : "opacity-100"
+          }`}
+        >
+          <TypewriterPonto
           overrideText={
             activeSection === "quem"
               ? "quem."
@@ -138,6 +143,7 @@ const Index = () => {
             activeSection === "comquem-zadig"
           }
         />
+        </div>
         <div
           className={`transition-opacity duration-500 ${
             transitioning ? "opacity-0" : "opacity-100"

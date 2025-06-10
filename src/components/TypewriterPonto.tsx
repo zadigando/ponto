@@ -71,14 +71,14 @@ const TypewriterPonto = ({
     return () => clearTimeout(timeout);
   }, [phase, displayText, currentText, currentIndex, overrideText, variants, animate]);
 
-  // Reinicia ao mudar overrideText
+  // Reinicia ao mudar overrideText ou animacao
   useEffect(() => {
     if (!animate) {
       setDisplayText(currentText);
       return;
     }
     setPhase("deleting");
-  }, [overrideText, animate, currentText]);
+  }, [overrideText, animate]);
 
   return (
     <h1 className="text-5xl md:text-7xl font-display tracking-[0.3em] relative text-center">
