@@ -17,6 +17,7 @@ const Index = () => {
     | "comquem"
     | "comquem-colaborador"
     | "comquem-enzo"
+    | "comquem-zadig"
   >("home");
 
   const [transitioning, setTransitioning] = useState(false);
@@ -97,6 +98,13 @@ const Index = () => {
       setTransitioning(false);
     }, 500);
   };
+  const handleClickZadig = () => {
+    setTransitioning(true);
+    setTimeout(() => {
+      setActiveSection("comquem-zadig");
+      setTransitioning(false);
+    }, 500);
+  };
 
   return (
     <div className="relative">
@@ -120,6 +128,8 @@ const Index = () => {
               ? "nosso colaborador."
               : activeSection === "comquem-enzo"
               ? "enzo"
+              : activeSection === "comquem-zadig"
+              ? "zadig"
               : null
           }
         />
@@ -233,7 +243,7 @@ const Index = () => {
                 {
                   id: "colab4",
                   label: "Zadig",
-                  onClick: handleClickColaborador,
+                  onClick: handleClickZadig,
                 },
               ]}
             />
@@ -258,6 +268,12 @@ const Index = () => {
             <h2 className="text-xl font-semibold">Enzo, the dude</h2>
             <p>Enzo é DJ nosso.</p>
             <p>Ele bom e novo</p>
+          </div>
+        )}
+        {activeSection === "comquem-zadig" && !transitioning && (
+          <div className="mt-12 text-black max-w-3xl mx-auto px-4 space-y-4 text-left text-base leading-relaxed opacity-0 scale-95 animate-fade-in">
+            <h2 className="text-xl font-semibold">Zadig, developer</h2>
+            <p>Short bio or description highlighting Zadig’s role as a developer.</p>
           </div>
         )}
       </section>
