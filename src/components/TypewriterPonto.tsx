@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import "./TypewriterPonto.css";
 
-type Phase = "typing" | "waiting" | "deleting";
+type Phase = "typing" | "waiting" | "deleting" | "done";
 
 const defaultVariants = ["PONTO.", "ac.", "ponto.ac."];
 const enzoVariants = ["enzo.", "enzo, the dude.", "the dude."];
@@ -10,9 +10,11 @@ const zadigVariants = ["zadig.", "z."];
 const TypewriterPonto = ({
   overrideText,
   animate = true,
+  loop = true,
 }: {
   overrideText?: string | null;
   animate?: boolean;
+  loop?: boolean;
 }) => {
   const isDynamic = overrideText === "enzo" || overrideText === "zadig";
   const variants =
@@ -44,12 +46,16 @@ const TypewriterPonto = ({
           setDisplayText(currentText.slice(0, displayText.length + 1));
         }, 150);
       } else {
-        setPhase("waiting");
+        setPhase(loop ? "waiting" : "done");
       }
     }
 
-    if (phase === "waiting" && animate) {
+    if (phase === "waiting" && animate && loop) {
       timeout = setTimeout(() => setPhase("deleting"), 1000);
+    }
+
+    if (phase === "done") {
+      // Do nothing, animation finished
     }
 
     if (phase === "deleting") {
@@ -75,6 +81,7 @@ const TypewriterPonto = ({
     overrideText,
     variants,
     animate,
+    loop,
     isDynamic,
   ]);
 
@@ -87,7 +94,7 @@ const TypewriterPonto = ({
     }
     setCurrentIndex(0);
     setPhase("deleting");
-  }, [overrideText, animate]);
+  }, [overrideText, animate, loop]);
 
   return (
     <h1 className="text-5xl md:text-7xl font-display tracking-[0.3em] relative text-center">
