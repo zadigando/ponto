@@ -117,7 +117,7 @@ const Index = () => {
             activeSection === "quem"
               ? "quem."
               : activeSection === "oque"
-              ? "oque."
+              ? "o que."
               : activeSection === "oque-marketing"
               ? "marketing."
               : activeSection === "oque-ti"
@@ -278,7 +278,9 @@ const Index = () => {
         {activeSection === "comquem-zadig" && !transitioning && (
           <div className="mt-12 text-black max-w-3xl mx-auto px-4 space-y-4 text-left text-base leading-relaxed opacity-0 scale-95 animate-fade-in">
             <h2 className="text-xl font-semibold">Zadig, developer</h2>
-            <p>Short bio or description highlighting Zadig’s role as a developer.</p>
+            <p>
+              Short bio or description highlighting Zadig’s role as a developer.
+            </p>
           </div>
         )}
       </section>
