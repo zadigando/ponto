@@ -132,6 +132,11 @@ const Index = () => {
               ? "zadig"
               : null
           }
+          animate={
+            activeSection === "home" ||
+            activeSection === "comquem-enzo" ||
+            activeSection === "comquem-zadig"
+          }
         />
         <div
           className={`transition-opacity duration-500 ${
