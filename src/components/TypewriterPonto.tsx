@@ -42,7 +42,7 @@ const TypewriterPonto = ({
       if (displayText.length < currentText.length) {
         timeout = setTimeout(() => {
           setDisplayText(currentText.slice(0, displayText.length + 1));
-        }, 100); // velocidade de digitar
+        }, 150); // velocidade de digitar
       } else {
         timeout = setTimeout(() => setPhase("waiting"), 1000);
       }
@@ -56,7 +56,7 @@ const TypewriterPonto = ({
       if (displayText.length > 0) {
         timeout = setTimeout(() => {
           setDisplayText(displayText.slice(0, -1));
-        }, 50); // velocidade de apagar
+        }, 100); // velocidade de apagar
       } else {
         if (overrideText) {
           setPhase("typing");
