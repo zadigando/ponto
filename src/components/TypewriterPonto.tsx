@@ -4,23 +4,38 @@ import "./TypewriterPonto.css";
 type Phase = "typing" | "waiting" | "deleting";
 
 const defaultVariants = ["PONTO.", "ac.", "ponto.ac."];
-const enzoVariants = ["enzo.", "enzo, the dude."];
+const enzoVariants = ["enzo.", "enzo, the dude.", "the dude."];
+const zadigVariants = ["zadig.", "z."];
 
 const TypewriterPonto = ({
   overrideText,
+  animate = true,
 }: {
   overrideText?: string | null;
+  animate?: boolean;
 }) => {
-  const isDynamic = overrideText === "enzo";
-  const variants = isDynamic ? enzoVariants : defaultVariants;
+  const isDynamic = overrideText === "enzo" || overrideText === "zadig";
+  const variants =
+    overrideText === "enzo"
+      ? enzoVariants
+      : overrideText === "zadig"
+      ? zadigVariants
+      : defaultVariants;
 
   const [displayText, setDisplayText] = useState("");
   const [phase, setPhase] = useState<Phase>("typing");
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  const currentText = overrideText ?? variants[currentIndex];
+  const currentText = isDynamic
+    ? variants[currentIndex]
+    : overrideText ?? variants[currentIndex];
 
   useEffect(() => {
+    if (!animate) {
+      setDisplayText(currentText);
+      return;
+    }
+
     let timeout: NodeJS.Timeout;
 
     if (phase === "typing") {
@@ -54,12 +69,16 @@ const TypewriterPonto = ({
     }
 
     return () => clearTimeout(timeout);
-  }, [phase, displayText, currentText, currentIndex, overrideText, variants]);
+  }, [phase, displayText, currentText, currentIndex, overrideText, variants, animate]);
 
-  // Reinicia ao mudar overrideText
+  // Reinicia ao mudar overrideText ou animacao
   useEffect(() => {
+    if (!animate) {
+      setDisplayText(currentText);
+      return;
+    }
     setPhase("deleting");
-  }, [overrideText]);
+  }, [overrideText, animate]);
 
   return (
     <h1 className="text-5xl md:text-7xl font-display tracking-[0.3em] relative text-center">
@@ -67,7 +86,7 @@ const TypewriterPonto = ({
       <span className="absolute inset-0 flex justify-center whitespace-nowrap">
         <span className="flex items-center gap-2">
           {displayText}
-          <span className="typewriter-cursor">|</span>
+          {animate && <span className="typewriter-cursor">|</span>}
         </span>
       </span>
     </h1>
