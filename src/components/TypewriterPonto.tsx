@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import "./TypewriterPonto.css";
 
 type Phase = "typing" | "waiting" | "deleting";
@@ -42,13 +42,13 @@ const TypewriterPonto = ({
       if (displayText.length < currentText.length) {
         timeout = setTimeout(() => {
           setDisplayText(currentText.slice(0, displayText.length + 1));
-        }, 150); // velocidade de digitar
+        }, 150);
       } else {
-        timeout = setTimeout(() => setPhase("waiting"), 1000);
+        setPhase("waiting");
       }
     }
 
-    if (phase === "waiting") {
+    if (phase === "waiting" && animate) {
       timeout = setTimeout(() => setPhase("deleting"), 1000);
     }
 
@@ -58,25 +58,34 @@ const TypewriterPonto = ({
           setDisplayText(displayText.slice(0, -1));
         }, 100); // velocidade de apagar
       } else {
-        if (overrideText) {
-          setPhase("typing");
-        } else {
+        if (isDynamic || !overrideText) {
           const next = (currentIndex + 1) % variants.length;
           setCurrentIndex(next);
-          setPhase("typing");
         }
+        setPhase("typing");
       }
     }
 
     return () => clearTimeout(timeout);
-  }, [phase, displayText, currentText, currentIndex, overrideText, variants, animate]);
+  }, [
+    phase,
+    displayText,
+    currentText,
+    currentIndex,
+    overrideText,
+    variants,
+    animate,
+    isDynamic,
+  ]);
 
-  // Reinicia ao mudar overrideText ou animacao
+  const firstRender = useRef(true);
+
   useEffect(() => {
-    if (!animate) {
-      setDisplayText(currentText);
+    if (firstRender.current) {
+      firstRender.current = false;
       return;
     }
+    setCurrentIndex(0);
     setPhase("deleting");
   }, [overrideText, animate]);
 

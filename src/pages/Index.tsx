@@ -118,31 +118,31 @@ const Index = () => {
           }`}
         >
           <TypewriterPonto
-          overrideText={
-            activeSection === "quem"
-              ? "quem."
-              : activeSection === "oque"
-              ? "o que."
-              : activeSection === "oque-marketing"
-              ? "marketing."
-              : activeSection === "oque-ti"
-              ? "ti."
-              : activeSection === "comquem"
-              ? "com quem."
-              : activeSection === "comquem-colaborador"
-              ? "nosso colaborador."
-              : activeSection === "comquem-enzo"
-              ? "enzo"
-              : activeSection === "comquem-zadig"
-              ? "zadig"
-              : null
-          }
-          animate={
-            activeSection === "home" ||
-            activeSection === "comquem-enzo" ||
-            activeSection === "comquem-zadig"
-          }
-        />
+            overrideText={
+              activeSection === "quem"
+                ? "quem."
+                : activeSection === "oque"
+                ? "o que."
+                : activeSection === "oque-marketing"
+                ? "marketing."
+                : activeSection === "oque-ti"
+                ? "ti."
+                : activeSection === "comquem"
+                ? "com quem."
+                : activeSection === "comquem-colaborador"
+                ? "nosso colaborador."
+                : activeSection === "comquem-enzo"
+                ? "enzo"
+                : activeSection === "comquem-zadig"
+                ? "zadig"
+                : null
+            }
+            animate={
+              activeSection === "home" ||
+              activeSection === "comquem-enzo" ||
+              activeSection === "comquem-zadig"
+            }
+          />
         </div>
         <div
           className={`transition-opacity duration-500 ${
